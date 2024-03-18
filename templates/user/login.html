@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html class="translated-ltr">
+<head>
+    <meta charset="utf-8">
+    <title>用户登录-人才招聘系统</title>
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="../../static/images/logo.svg">
+    <!-- Bootstrap core CSS -->
+    <link href="../../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Icons -->
+    <link href="../../static/vendor/icons/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css">
+    <link href="../../static/css/style.css" rel="stylesheet">
+</head>
+<body>
+<!-- Login -->
+<div class="bg-white">
+    <div class="container">
+        <div class="row justify-content-center align-items-center d-flex vh-100">
+            <div class="col-lg-4 mx-auto">
+                <div class="osahan-login py-4">
+                    <div class="text-center mb-4">
+                        <a href="/index"><img src="../../static/images/logo.svg" alt=""></a>
+                        <h5 class="font-weight-bold mt-3"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">欢迎回来</font></font></h5>
+                        <p class="text-muted"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;">不要错过下一个机会。</font><font
+                                style="vertical-align: inherit;">登录以随时了解您的专业世界。</font></font></p>
+                    </div>
+                    <form action="/user/login/" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label class="mb-1"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">邮箱</font></font></label>
+                            <div class="position-relative icon-form-control">
+                                <i class="mdi mdi-email-outline position-absolute"></i>
+                                <input type="email" name="username" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-1"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">密码</font></font></label>
+                            <div class="position-relative icon-form-control">
+                                <i class="mdi mdi-key-variant position-absolute"></i>
+                                <input type="password" name="pwd" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-1"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">验证码</font></font></label>
+                            <div class="position-relative icon-form-control input-group">
+                                <input type="text" class="form-control" style="padding-left: 15px;" name="checkcode" required>
+                                <input type="text" name="code" id="code" hidden>
+
+                                <div class="input-group-append">
+                                <img src="/captcha_img/" onclick="changeCheckCode(this);">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1"><font
+                                    style="vertical-align: inherit;"><font style="vertical-align: inherit;">记住密码</font></font></label>
+                        </div>
+                        <button class="btn btn-success btn-block text-uppercase" type="submit"><font
+                                style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                            登入 </font></font></button>
+
+                        <div class="py-3 d-flex align-item-center">
+                            <span class="errmsg">{{ errmsg }}</span>
+                            <a href="/user/forget_password/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">忘记密码？</font></font></a>
+                            <span class="ml-auto"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">没有账户？</font></font><a href="/user/register/"><font
+                                    style="vertical-align: inherit;"><font style="vertical-align: inherit;">现在加入</font></font></a></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Login -->
+<script src="../../static/vendor/jquery/jquery.min.js"></script>
+<script src="../../static/js/custom.js"></script>
+<script src="../../static/js/code.js"></script>
+</body>
+</html>

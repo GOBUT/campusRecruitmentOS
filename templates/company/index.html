@@ -1,0 +1,120 @@
+{% extends 'company/base.html' %}
+{% load static %}
+{% block title %}校园招聘系统-企业{% endblock title %}
+{% block topfiles %}{% endblock topfiles %}
+{% block body %}
+    <section class="py-5 homepage-search-block position-relative">
+        <div class="container">
+            <div class="row py-lg-5">
+                <div class="col-lg-7">
+                    <div class="homepage-search-title">
+                        <h1 class="mb-3 text-shadow text-gray-900 font-weight-bold"><font
+                                style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                            寻找适合您的企业和工作职位</font></font></h1>
+                        <h5 class="mb-5 text-shadow text-gray-800 font-weight-normal"><font
+                                style="vertical-align: inherit;"><font style="vertical-align: inherit;">校园招聘系统为您找到满意的职位
+                        </font></font></h5>
+                    </div>
+                    <div class="homepage-search-form" data-select2-id="4">
+                        <form class="form-noborder" data-select2-id="3">
+                            <div class="form-row">
+                                <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+                                    <div class="location-dropdown">
+                                        <i class="icofont-location-arrow"></i>
+                                        <select class="custom-select form-control border-0 shadow-sm form-control-lg select2-hidden-accessible"
+                                            data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option data-select2-id="3"><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;"> 职位</font></font></option>
+                                        <option data-select2-id="7"><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;"> 企业</font></font></option>
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 col-md-7 col-sm-12 form-group">
+                                    <input type="text" placeholder="搜索..."
+                                           class="form-control border-0 form-control-lg shadow-sm">
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-12 form-group">
+                                    <button type="submit"
+                                            class="btn btn-success btn-block btn-lg btn-gradient shadow-sm"><i
+                                            class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <img class="img-fluid" src="../static/images/banner2.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container">
+        <div class="about-section py-5">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2><font style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;">企业</font></font><br><font
+                            style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font>
+                    </h2>
+                    <ul>
+                        <li><span><img src="../static/images/checkmark.svg"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;"> 优秀人才资源</font></font></span><font
+                                style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                            人才认证系统，提供更高质量人才资源。
+                        </font></font></li>
+                        <li><span><img src="../static/images/checkmark.svg"><font style="vertical-align: inherit;"><font
+                                style="vertical-align: inherit;"> 在线预约面试</font></font></span><font
+                                style="vertical-align: inherit;"><font style="vertical-align: inherit;">提供简历筛选功能，人性化的面试邀请系统。</font></font>
+                        </li>
+{#                        <li><span><img src="../static/images/checkmark.svg"><font style="vertical-align: inherit;"><font#}
+{#                                style="vertical-align: inherit;"> 客服支持#}
+{#                           </font></font></span><font style="vertical-align: inherit;"><font#}
+{#                                style="vertical-align: inherit;">。#}
+{#                        </font></font></li>#}
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <img src="../static/images/banner3.jpg" class="video-img w-100">
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="guide-wrapper py-5">
+        <div class="container">
+            <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                宣讲会
+{#                </font></font><a href="#" class="float-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">查看更多&gt;</font></font></a>#}
+            </h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="user/video_tencent" class="guide">
+                        <img src="../static/images/guide_2.jpg">
+                        <div class="content">
+                            <h6><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">腾讯2022校园招聘空中宣讲会直播</font></font></h6>
+                            <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">腾讯</font></font></p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="user/video_bilibili" class="guide">
+                        <img src="../static/images/guide_3.jpg">
+                        <div class="content">
+                            <h6><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">哔哩哔哩2022校园招聘在线宣讲会</font></font></h6>
+                            <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">哔哩哔哩动画</font></font></p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="user/video_schneider" class="guide">
+                        <img src="../static/images/guide_1.jpg">
+                        <div class="content">
+                            <h6><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">施耐德2022春季校园招聘空中宣讲会来了</font></font></h6>
+                            <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">施耐德电器</font></font></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}修改密码-人才招聘系统{% endblock title %}
+{% block body %}
+    <div class="main-page second py-5">
+        <div class="container">
+            <div class="row">
+                <div class="profile_info" style="width: 100%;">
+                    <div class="seller-card" style="text-align: inherit; ">
+                        <form action="/user/password/" method="post">
+                            <h2 class="h5">修改密码</h2>
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">重设密码</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="pwd">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">确认密码</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="cpwd">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">验证码</label>
+                                <div class="col-sm-4">
+                                    <input type="text" id='email' value="{{ request.user.email }}" hidden>
+                                    <input type="text" class="form-control" style="padding-left: 15px;" name="checkcode">
+                                </div>
+                                <div class="col-sm-4">
+                                     <img src="/captcha_img/" onclick="changeCheckCode(this);">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">提交</button>
+                                    <span class="errmsg">{{ errmsg }}</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../static/js/code.js"></script>
+{% endblock body %}

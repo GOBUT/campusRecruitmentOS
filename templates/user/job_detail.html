@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}招聘信息-人才招聘系统{% endblock title %}
+{% block topfiles %}{% endblock topfiles %}
+{% block body %}
+    <div class="main-page py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{ job.name }}</h2>
+                    <div class="font-weight-normal" style="margin-bottom: 8px;"><i
+                            class="fa fa-clock-o"></i> {{ job.create }} 发布 阅读({{ job.pv }}) 已投递({{ job.heat }})
+                    </div>
+                    <h4>¥{{ job.salary }}</h4>
+                    <div class="seller-overview d-flex align-items-center">
+                        <div class="job-flex"><span>{{ job.workcity }}</span></div>
+                        <div class="job-flex job">{{ job.company }}</div>
+                        <div class="job-flex job">{{ job.education }}</div>
+                        <div class="job-flex job">{{ job.experience }}</div>
+                    </div>
+                    <hr>
+                    <div class="description">
+                        <p>{{ job.content }}</p>
+                    </div>
+                    <a href="/user/send/{{ job.id }}/" class="btn btn-outline-success btn-sm mr-3">申请职位</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

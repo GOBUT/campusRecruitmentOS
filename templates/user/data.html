@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="Gurdeep singh osahan">
+		<meta name="author" content="Gurdeep singh osahan">
+		<title>
+			{% block title %}{% endblock title %}
+		</title>
+		{% load static %}
+		<!-- Favicon Icon -->
+		<link rel="icon" type="image/png" href="{% static 'images/logo.svg' %}">
+		<!-- Bootstrap core CSS -->
+		<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+		<!-- Font Awesome-->
+		<link href="{% static 'vendor/fontawesome/css/font-awesome.min.css' %}"
+		rel="stylesheet">
+		<!-- Material Design Icons -->
+		<link href="{% static 'vendor/icons/css/materialdesignicons.min.css' %}"
+		media="all" rel="stylesheet" type="text/css">
+		<!-- Slick -->
+		<link href="{% static 'vendor/slick-master/slick/slick.css' %}" rel="stylesheet"
+		type="text/css">
+		<!-- Lightgallery -->
+		<link href="{% static 'vendor/lightgallery-master/dist/css/lightgallery.min.css' %}"
+		rel="stylesheet">
+		<!-- Select2 CSS -->
+		<link href="{% static 'vendor/select2/css/select2-bootstrap.css' %}">
+		<link href="{% static 'vendor/select2/css/select2.min.css' %}" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="{% static 'css/style.css' %}" rel="stylesheet">
+		<script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js">
+		</script>
+		<script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js">
+		</script>
+		{% block topfiles %}{% endblock topfiles %}
+	</head>
+	<body>
+		<!-- header -->
+		<nav class="navbar navbar-expand-lg navbar-light topbar static-top shadow-sm bg-white osahan-nav-top px-0">
+			<div class="container">
+				<!-- Sidebar Toggle (Topbar) -->
+				<a class="navbar-brand" href="/index">
+					<img src="/static/images/logo.png">
+					<span class="logo-text">
+						<span style="vertical-align: inherit;">
+							<span style="vertical-align: inherit;">
+								校园招聘系统
+							</span>
+						</span>
+					</span>
+				</a>
+				<!-- Topbar Search -->
+				<form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search"
+				action="/" method="post">
+					<div class="input-group">
+						{% csrf_token %}
+						<input type="text" class="form-control bg-white small" name="kw" placeholder="搜索">
+						<div class="input-group-append">
+							<button class="btn btn-success" type="submit">
+								<i class="fa fa-search fa-sm">
+								</i>
+							</button>
+						</div>
+					</div>
+				</form>
+				<!-- Topbar Navbar -->
+				<ul class="navbar-nav align-items-center ml-auto">
+					<li class="nav-item dropdown no-arrow no-caret dropdown-user">
+						{% if request.user.is_authenticated %}
+						<a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage"
+						href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">
+							<img class="img-fluid" src="{% if request.user.photo %}/{{ request.user.photo }}{% else %}/static/images/user/Avatar.png{% endif %}">
+						</a>
+						{% else %}
+						<a id="navbarDropdownUserImage" href="javascript:void(0);" role="button"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							请登录
+						</a>
+						{% endif %}
+						<div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
+						aria-labelledby="navbarDropdownUserImage">
+							{% if request.user.is_authenticated %}
+							<h6 class="dropdown-header d-flex align-items-center">
+								<img class="dropdown-user-img" src="{% if request.user.photo %}/{{ request.user.photo }}{% else %}/static/images/user/Avatar.png{% endif %}">
+								{#
+								<img src="{% if info.photo %}/{{ info.photo }}{% else %}../static/images/Avatar.png{% endif %}"
+								class="dropdown-user-img">
+								#}
+								<div class="dropdown-user-details">
+									<div class="dropdown-user-details-name">
+										<font style="vertical-align: inherit;">
+											<font style="vertical-align: inherit;">
+												{{ request.user.last_name }}{{ request.user.first_name }}
+											</font>
+										</font>
+									</div>
+									<div class="dropdown-user-details-email">
+										<font style="vertical-align: inherit;">
+											<font style="vertical-align: inherit;">
+												{{ request.user.email }}
+											</font>
+										</font>
+									</div>
+								</div>
+							</h6>
+							<div class="dropdown-divider">
+							</div>
+							<a class="dropdown-item" href="/user/">
+								<div class="dropdown-item-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+									fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+									stroke-linejoin="round" class="feather feather-settings">
+										<circle cx="12" cy="12" r="3">
+										</circle>
+										<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+										</path>
+									</svg>
+								</div>
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">
+										<font style="vertical-align: inherit;">
+											<font style="vertical-align: inherit;">
+												<font style="vertical-align: inherit;">
+													<font style="vertical-align: inherit;">
+														我的账户
+													</font>
+												</font>
+											</font>
+										</font>
+									</font>
+								</font>
+							</a>
+							<a class="dropdown-item" href="/user/logout/">
+								<div class="dropdown-item-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+									fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+									stroke-linejoin="round" class="feather feather-log-out">
+										<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4">
+										</path>
+										<polyline points="16 17 21 12 16 7">
+										</polyline>
+										<line x1="21" y1="12" x2="9" y2="12">
+										</line>
+									</svg>
+								</div>
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">
+										退出
+									</font>
+								</font>
+							</a>
+							{% else %}
+							<a class="dropdown-item" href="/user/login/">
+								<div class="dropdown-item-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+									fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+									stroke-linejoin="round" class="feather feather-login">
+										<circle cx="12" cy="12" r="3">
+										</circle>
+										<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+										</path>
+									</svg>
+								</div>
+								<font style="vertical-align: inherit;">
+									登录
+								</font>
+							</a>
+							<a class="dropdown-item" href="/user/register/">
+								<div class="dropdown-item-icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+									fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+									stroke-linejoin="round" class="feather feather-register">
+										<circle cx="12" cy="12" r="3">
+										</circle>
+										<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+										</path>
+									</svg>
+								</div>
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">
+										<font style="vertical-align: inherit;">
+											<font style="vertical-align: inherit;">
+												<font style="vertical-align: inherit;">
+													<font style="vertical-align: inherit;">
+														注册
+													</font>
+												</font>
+											</font>
+										</font>
+									</font>
+								</font>
+							</a>
+							{% endif %}
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<!-- Navigation -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-white osahan-nav-mid px-0 border-top shadow-sm">
+			<div class="container">
+				<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="切换导航">
+					<span class="navbar-toggler-icon">
+					</span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="/">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">
+										首页
+									</font>
+								</font>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/user/company/">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">
+										企业
+									</font>
+								</font>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/user/job/">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">
+										招聘信息
+									</font>
+								</font>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/user/data/">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">
+										招聘大数据
+									</font>
+								</font>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/user/send/">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">
+										<font style="vertical-align: inherit;">
+											<font style="vertical-align: inherit;">
+												简历投递
+											</font>
+										</font>
+									</font>
+								</font>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/user/interview/">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">
+										<font style="vertical-align: inherit;">
+											<font style="vertical-align: inherit;">
+												面试邀请
+											</font>
+										</font>
+									</font>
+								</font>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/user/resume/">
+								<font style="vertical-align: inherit;">
+									<font style="vertical-align: inherit;">
+										<font style="vertical-align: inherit;">
+											<font style="vertical-align: inherit;">
+												我的简历
+											</font>
+										</font>
+									</font>
+								</font>
+							</a>
+						</li>
+					</ul>
+				</div>
+				{% if not request.user.is_authenticated %}
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/user/login/">
+							<i class="fa fa-fw fa-user">
+							</i>
+							<span>
+								<span style="vertical-align: inherit;">
+									<span style="vertical-align: inherit;">
+										用户入口
+									</span>
+								</span>
+							</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/company/" target="_blank">
+							<i class="fa fa-fw fa-trophy">
+							</i>
+							<span>
+								<font style="vertical-align: inherit;">
+									<span style="vertical-align: inherit;">
+										企业入口
+									</span>
+								</font>
+							</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/admin/">
+							<img class="country-flag img-fluid" src="/static/images/flag/admin.png">
+							<span>
+								<span style="vertical-align: inherit;">
+									<span style="vertical-align: inherit;">
+										管理员入口
+									</span>
+								</span>
+							</span>
+						</a>
+					</li>
+				</ul>
+				{% endif %}
+			</div>
+		</nav>
+    <section class="py-5 bg-dark inner-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="mt-0 mb-3 text-white">招聘大数据</h1>
+                    <div class="breadcrumbs">
+                        <p class="mb-0 text-white"><a class="text-white" href="/">首页</a> / <span
+                                class="text-success">招聘大数据</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <p style="height: 20px"></p>
+{#        <div class="container">#}
+            <div>
+                <div class="text-center">
+                    {% include "user/data_detail.html" %}
+                    <p style="height: 20px"></p>
+                </div>
+                 <div class="container">
+                    {% include "user/basic_wordcloud.html" %}
+                </div>
+            </div>
+{#        </div>#}
+
+{#		图表开始#}
+{#    <section class="py-5 homepage-search-block position-relative">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col">#}
+{#                    <div id="bar" style="width:1000px; height:600px;"></div>#}
+{#                        <script>#}
+{#                            var chart = echarts.init(document.getElementById('bar'), 'white', {renderer: 'canvas'});#}
+{##}
+{#                            $(#}
+{#                                function () {#}
+{#                                    fetchData(chart);#}
+{#                                }#}
+{#                            );#}
+{##}
+{#                            function fetchData() {#}
+{#                                $.ajax({#}
+{#                                    type: "GET",#}
+{#                                    url: "http://127.0.0.1:8000/user/bar",#}
+{#                                    dataType: 'json',#}
+{#                                    success: function (result) {#}
+{#                                        chart.setOption(result.data);#}
+{#                                    }#}
+{#                                });#}
+{#                            }#}
+{#                        </script>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+
+
+{#图表结束#}
+		<footer class="bg-white">
+			<div class="container">
+				<div class="d-flex justify-content-between">
+				</div>
+				<div class="copyright">
+					<div class="logo">
+						<a href="index">
+							<img src="{% static 'images/logo.png' %}">
+							<span>
+								校园招聘系统
+							</span>
+						</a>
+					</div>
+					<p>
+						<font style="vertical-align: inherit;">
+							<font style="vertical-align: inherit;">
+								版权所有©2022.保留所有权利。
+							</font>
+						</font>
+					</p>
+				</div>
+			</div>
+		</footer>
+		<!-- Bootstrap core JavaScript -->
+		<script src="{% static 'vendor/jquery/jquery.min.js' %}">
+		</script>
+		<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}">
+		</script>
+		<!-- Contact form JavaScript -->
+		<!-- Slick -->
+		<script src="{% static 'vendor/slick-master/slick/slick.js' %}" type="text/javascript"
+		charset="utf-8">
+		</script>
+		<!-- lightgallery -->
+		<script src="{% static 'vendor/lightgallery-master/dist/js/lightgallery-all.min.js' %}">
+		</script>
+		<!-- select2 Js -->
+		<script src="{% static 'vendor/select2/js/select2.min.js' %}">
+		</script>
+		<!-- Custom -->
+		<script src="{% static 'js/custom.js' %}">
+		</script>
+	</body>
+
+</html>

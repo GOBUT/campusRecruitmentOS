@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}企业详情-人才招聘系统{% endblock title %}
+{% block topfiles %}{% endblock topfiles %}
+{% block body %}
+    <section class="py-5 bg-dark inner-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="mt-0 mb-3 text-white">企业详情</h1>
+                    <div class="breadcrumbs">
+                        <p class="mb-0 text-white"><a class="text-white" href="/">首页</a> / <a class="text-white"
+                                                                                              href="/user/company/">企业信息</a>
+                            / <span
+                                    class="text-success">企业详情</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="pl-4 col-lg-5 col-md-5 pr-4">
+                    <img class="rounded img-fluid" width="100%" src="/{{ c.photo }}">
+                </div>
+                <div class="col-lg-6 col-md-6 pl-5 pr-5">
+                 <h3 class="mt-1 mb-4">{{ c.name }}</h3>
+                  <h6 class="text-dark"><i class="mdi mdi-home-map-marker"></i> 公司地址 :</h6>
+                  <p>{{ c.address }}</p>
+                  <h6 class="text-dark"><i class="mdi mdi-phone"></i> 联系电话 :</h6>
+                  <p>{{ c.phone }}</p>
+                  <h6 class="text-dark"><i class="mdi mdi-email"></i> 邮箱地址 :</h6>
+                  <p>{{ c.mail }}</p>
+
+                    <p>{{ c.info }}</p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+     <div class="container">
+                <div class="row">
+                    <div class="col-md-12" style="margin: 20px 0;"><h3>招聘信息（{{ count }}）</h3></div>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-12">
+                    {% if lists %}
+                        {% for i in lists %}
+                            <div class="profile_info">
+                                <div class="seller-card">
+                                    <div class="user-stats-desc">
+                                        <ul class="user-stats"
+                                            style="border: none;margin: 0;padding: 0;font-size: inherit;">
+                                            <li style="font-size: 20px;font-weight: bolder;">
+                                                <a href="/user/job/{{ i.id }}/">{{ i.name }}</a><strong>{{ i.company }}</strong>
+                                            </li>
+                                            <li>¥{{ i.salary }}<strong
+                                                    style="font-weight: normal;">{{ i.type }}</strong></li>
+                                            <li>{{ i.workcity }}｜{{ i.experience }}｜{{ i.education }}<strong
+                                                    style="color: gray;font-weight: normal;">{{ i.create }} 发布</strong>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                            <div class="profile_info">
+                                <div class="seller-card">
+                                    <div class="user-stats-desc">
+                                        暂未发布职位信息
+                                    </div>
+                                </div>
+                            </div>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+    </section>
+{% endblock body %}

@@ -1,0 +1,76 @@
+{% extends 'company/base.html' %}
+{% load static %}
+{% block title %}筛选简历-人才招聘系统{% endblock title %}
+{% block topfiles %}{% endblock topfiles %}
+{% block body %}
+    <div class="main-page py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" style="margin: 20px 0;">
+                    <h3>职位信息</h3>
+                </div>
+                <div class="col-md-6">
+                    <p>职位名称：{{ job.name }}</p>
+                    <p>薪资：{{ job.salary }}</p>
+                    <p>工作城市：{{ job.workcity }}</p>
+
+                </div>
+                <div class="col-md-6">
+                    <p>学历要求：{{ job.education }}</p>
+                    <p>经验要求：{{ job.experience }}</p>
+                    <p>发布时间：{{ job.create }}</p>
+                </div>
+                <div class="col-md-12 xx">
+                    <p>{{ job.content }}</p>
+                </div>
+                <div class="col-md-10" style="margin: 20px 0;">
+                    <h3>应聘者简历</h3>
+                </div>
+                <div class="col-md-2" style="margin: 20px 0;">
+                    {% if status == 2 %}
+                        <a href="/company/send/{{ id }}/3/" class="btn btn-outline-success btn-sm mr-3">邀面试</a>
+                        <a href="/company/send/{{ id }}/4/" class="btn btn-outline-danger btn-sm mr-3">不合适</a>
+                    {% else %}
+                        <span>
+                            已处理：
+                            {% if status == 3 %}<p class="btn btn-outline-success">邀面试</p>{% endif %}
+                            {% if status == 4 %}<p class="btn btn-outline-danger">不合适</p>{% endif %}
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="profile_info col-md-12" style="width: 100%;">
+                    <div class="seller-card" style="text-align: inherit; ">
+                        <img src="/{{ info.photo }}" style="margin-top: 10px;margin-bottom: 20px;width: 130px;">
+                        <p>姓名：{{ info.name }}</p>
+                        <p>性别：{{ info.sex }}</p>
+                        <p>出生年月：{{ info.birth }}</p>
+                        <p>户籍所在地：{{ info.registration }}</p>
+                        <p>居住城市：{{ info.now }}</p>
+                        <p>联系方式：{{ info.phone }}</p>
+                        <p>电子邮箱：{{ info.mail }}</p>
+                        <h2 class="h5">求职意向</h2>
+                        <p>求职岗位：{{ info.job }}</p>
+                        <p>薪资要求：{{ info.salary }}</p>
+                        <h2 class="h5">教育经历</h2>
+                        <p>{{ info.education }}</p>
+
+                        <h2 class="h5">项目经历</h2>
+                        <p>{{ info.subject }}</p>
+
+                        <h2 class="h5">语言能力</h2>
+                        <p>{{ info.language }}</p>
+
+                        <h2 class="h5">专业技能</h2>
+                        <p>{{ info.skill }}</p>
+                        <h2 class="h5">证书</h2>
+                        <p>{{ info.certificates }}</p>
+
+                        <h2 class="h5">自我评价</h2>
+                        <p>{{ info.evaluation }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock body %}

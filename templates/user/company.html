@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}企业信息-人才招聘系统{% endblock title %}
+{% block topfiles %}{% endblock topfiles %}
+{% block body %}
+    <section class="py-5 bg-dark inner-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="mt-0 mb-3 text-white">企业信息</h1>
+                    <div class="breadcrumbs">
+                        <p class="mb-0 text-white"><a class="text-white" href="/">首页</a> / <span
+                                class="text-success">企业信息</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="main-page best-selling">
+        <div class="view_slider recommended pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-11"><h3>企业信息</h3></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    {% for i in lists %}
+                        <div class="col-md-3">
+                            <a href="/user/company/{{ i.id }}/">
+                                <img class="img-fluid" src="{% if i.photo %}/{{ i.photo }}{% else %}/static/images/company/default.jpg{% endif %}">
+                            </a>
+                            <div class="inner-slider">
+                                <div class="inner-wrapper">
+                                    <div class="d-flex align-items-center">
+                              <span class="seller-name">
+                              <a href="/user/company/{{ i.id }}/">{{ i.name }}</a>
+                              <span class="level hint--top level-one-seller">{{ i.mail }}</span></span>
+                                    </div>
+                                    <h3>{% if i.address %}{{ i.address }}{% else %}暂无{% endif %}</h3>
+                                    <div class="content-info"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

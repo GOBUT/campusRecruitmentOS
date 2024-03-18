@@ -1,0 +1,56 @@
+{% extends 'company/base.html' %}
+{% load static %}
+{% block title %}人才招聘系统-企业版{% endblock title %}
+{% block topfiles %}{% endblock topfiles %}
+{% block body %}
+    <div class="main-page second py-5">
+        <div class="container">
+            <div class="row">
+                <div class="profile_info" style="width: 100%;">
+                    <div class="seller-card" style="text-align: inherit; ">
+                        <form action="/company/talk/update/{{ id }}/" method="post" enctype="multipart/form-data">
+                            <h2 class="h5">宣讲会信息修改</h2>
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">宣讲会名称</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="name" value="{{ info.name }}">
+                                </div>
+                            </div>
+                             <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">举办城市</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="city" value="{{ info.city }}">
+                                </div>
+                            </div>
+                             <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">举办地点</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="position" value="{{ info.position }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">举办日期</label>
+                                <div class="col-sm-5">
+                                    <input type="date" class="form-control" name="date"
+                                           value="{{ info.date }}">
+                                </div>
+                                     <div class="col-sm-5">
+                                    <input type="time" class="form-control" name="time"
+                                           value="{{ info.time }}">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">提交</button>
+                                    <span class="errmsg">{{ errmsg }}</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}我的简历-人才招聘系统{% endblock title %}
+{% block topfiles %}{% endblock topfiles %}
+{% block body %}
+    <div class="main-page second py-5">
+        <div class="container">
+            <div class="row">
+                <div class="profile_info" style="width: 100%;">
+                    <div class="seller-card" style="text-align: inherit; ">
+                        <form action="/user/resume/update/" method="post" enctype="multipart/form-data">
+                            <h2 class="h5">个人信息</h2>
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">姓名</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="name" value="{{ info.name }}">
+                                </div>
+                            </div>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <legend class="col-form-label col-sm-2 pt-0">性别</legend>
+                                    <div class="col-sm-10">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="sex"
+                                                   id="gridRadios1" value="男"
+                                                   {% if info.sex == '男' %}checked=""{% endif %}>
+                                            <label class="form-check-label" for="gridRadios1">男</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="sex"
+                                                   id="gridRadios1" value="女"
+                                                   {% if info.sex == '女' %}checked=""{% endif %}>
+                                            <label class="form-check-label" for="gridRadios1">女</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">出生年月</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" name="birth"
+                                           value="{{ info.birth|date:'Y-m-d' }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">户籍所在地</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="registration" value="{{ info.registration }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">居住城市</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="now" value="{{ info.now }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">电话</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" class="form-control" id="inputTel1" name="phone"
+                                           value="{{ info.phone }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">邮箱</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputEmail3" name="mail"
+                                           value="{{ info.mail }}">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">照片</label>
+                                <div class="col-sm-10">
+                                    {% if info.photo %}
+                                    <img src="/{{ info.photo }}" width="200" height="200" style="margin:10px 0;">
+                                    {% endif %}
+                                    <input type="file" class="form-control" name="photo" >
+                                </div>
+                            </div>
+                            <hr>
+                            <h2 class="h5">求职意向</h2>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">求职岗位</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="job" value="{{ info.job }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">薪资要求</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="salary" value="{{ info.salary }}">
+                                </div>
+                            </div>
+
+                            <hr>
+                            <h2 class="h5">教育经历</h2>
+                            <div class="form-group">
+                                <textarea class="form-control" name="education" rows="5">{{ info.education }}</textarea>
+                            </div>
+
+                            <hr>
+                            <h2 class="h5">项目经历</h2>
+                            <div class="form-group">
+                                <textarea class="form-control" name="subject"  rows="5">{{ info.subject }}</textarea>
+                            </div>
+
+                            <hr>
+                            <h2 class="h5">语言能力</h2>
+                            <div class="form-group">
+                                <textarea class="form-control" name="language" rows="5">{{ info.language }}</textarea>
+                            </div>
+                            <hr>
+                            <h2 class="h5">专业技能</h2>
+                            <div class="form-group">
+                                <textarea class="form-control"  name="skill"  rows="5">{{ info.skill }}</textarea>
+                            </div>
+                            <hr>
+                            <h2 class="h5">证书</h2>
+                            <div class="form-group">
+                                <textarea class="form-control" name="certificates" rows="5">{{ info.certificates }}</textarea>
+                            </div>
+                            <hr>
+                            <h2 class="h5">自我评价</h2>
+                            <div class="form-group">
+                                <textarea class="form-control"  name="evaluation" rows="5">{{ info.evaluation }}</textarea>
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">提交</button>
+                                    <span class="errmsg">{{ errmsg }}</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

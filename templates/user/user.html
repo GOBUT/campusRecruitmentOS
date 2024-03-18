@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}我的账户-人才招聘系统{% endblock title %}
+{% block topfiles %}{% endblock topfiles %}
+{% block body %}
+    <div class="main-page second py-5">
+        <div class="container">
+            <div class="row">
+                <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
+                  <div class="box mb-3 shadow-sm rounded bg-white profile-box text-center">
+                     <div class="p-5">
+                         <img src="{% if info.photo %}/{{ info.photo }}{% else %}/static/images/user/Avatar.png{% endif %}" class="img-fluid" alt="Responsive image">
+                     </div>
+                     <div class="p-3 border-top border-bottom">
+                                <a href="/user/photo/" class="btn btn-outline-success pl-4 pr-4">修改头像</a>
+                     </div>
+
+                  </div>
+               </aside>
+                <main class="col col-xl-9 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+                <div class="profile_info" style="width: 100%;">
+                    <div class="seller-card" style="text-align: inherit; ">
+                            <div class="buttons-wrapper" style="width: 100px;float: right;margin: 0;">
+                                <a href="/user/password/"
+                                   class="btn-lrg-standard btn-contact-me js-contact-me js-open-popup-join">修改密码</a>
+                            </div>
+                        <h2 class="h5">我的账户</h2>
+                        <p>姓名：{{ info.last_name }}{{ info.first_name }}</p>
+                        <p>电子邮箱：{{ info.email }}</p>
+                        <p>登录账户：{{ info.username }}</p>
+                    </div>
+                </div>
+                </main>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

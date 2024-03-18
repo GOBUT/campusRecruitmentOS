@@ -1,0 +1,31 @@
+{% extends 'company/base.html' %}
+{% load static %}
+{% block title %}我的账户-人才招聘系统{% endblock title %}
+{% block topfiles %}{% endblock topfiles %}
+{% block body %}
+    <div class="main-page second py-5">
+        <div class="container">
+            <div class="row">
+                <div class="profile_info" style="width: 100%;">
+                    <div class="seller-card" style="text-align: inherit; ">
+                        <div class="buttons-wrapper" style="width: 100px;float: right;margin: 0;">
+                            <a href="/company/company/"
+                               class="btn-lrg-standard btn-contact-me js-contact-me js-open-popup-join">修改信息</a>
+                        </div>
+                        <h2 class="h5">企业信息</h2>
+                        <img src="{% if c.photo %}/{{ c.photo }}{% else %}/static/images/default_user.png{% endif %}" style="margin-top: 10px;margin-bottom: 20px;width: 130px;">
+                        <h3 class="mt-1 mb-4">{{ c.name }}</h3>
+                        <p><i class="mdi mdi-home-map-marker"></i> 公司地址 :{{ c.address }}</p>
+                        <p><i class="mdi mdi-phone"></i> 联系电话 :{{ c.phone }}</p>
+                        <p><i class="mdi mdi-email"></i> 邮箱地址 :{{ c.mail }}</p>
+                        <p>{{ c.info }}</p>
+
+                        <h2 class="h5">账户信息</h2>
+                        <p>账户：{{ c.username }}</p>
+                        <p>密码：{{ c.password }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

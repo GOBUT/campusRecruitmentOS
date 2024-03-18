@@ -1,0 +1,301 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}招聘信息-人才招聘系统{% endblock title %}
+{% block topfiles %}
+<script  type="text/javascript">
+function education_btn() {
+    var education_need = document.getElementById("education_need").value;
+    window.location.href = '/user/education_equirements/' + education_need;
+  }
+function city_btn() {
+    var work_city = document.getElementById("work_city").value;
+    window.location.href = '/user/city_filter/' + work_city;
+  }
+</script>
+{% endblock topfiles %}
+{% block body %}
+    <section class="py-5 bg-dark inner-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="mt-0 mb-3 text-white">招聘信息</h1>
+                    <div class="breadcrumbs">
+                        <p class="mb-0 text-white"><a class="text-white" href="/">首页</a> / <span
+                                class="text-success">招聘信息</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="main-page best-selling">
+        <div class="view_slider recommended pt-5">
+            <div class="container">
+                <div class="row">
+{#                    <div class="col-md-11"><h3>招聘信息</h3></div>#}
+                </div>
+                <div class="row" style="margin-bottom: 20px;">
+                    <div class="col-md-12">
+                        <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search"
+                              action="/user/search/" method="post">
+                            {% csrf_token %}
+                            <div class="input-group" style="float: left;margin-right: 10px;">
+                                <div class="sorting d-flex align-items-center" style="width: 140px;">
+                                    <select class="custom-select custom-select-sm border-0 shadow-sm ml-2" name="type">
+                                            <option value="all">全部</option>
+                                        {% for i in types %}
+                                            <option value="{{ i.id }}">{{ i.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="input-group" style="float: left;margin-right: 10px;">
+                                <div class="sorting d-flex align-items-center" style="width: 140px;">
+                                    <select class="custom-select custom-select-sm border-0 shadow-sm ml-2" name="row">
+                                        <option value="company">企业</option>
+                                        <option value="salary">薪资</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-white small" placeholder="搜索" name="kw">
+                                <div class="input-group-append">
+                                    <button class="btn btn-success" type="submit">
+                                        <i class="fa fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                                <p style="width: 10px"></p>
+
+
+                                <div class="input-group-append" >
+                                    <select  class="form-control" id="education_need" >
+                                        <option value="全部学历">全部学历</option>
+                                        <option value="专科">专科</option>
+                                        <option value="本科">本科</option>
+                                        <option value="研究生">研究生</option>
+                                    </select>
+                                    <input type="button"  class="btn btn-info"  value="学历筛选" onclick="education_btn()" >
+                                </div>
+                                <p style="width: 10px"></p>
+
+
+                                <div class="input-group-append" >
+                                    <select  class="form-control"  id="work_city"  >
+                                        <option value="全部">全部城市</option>
+                                        <option value="北京">北京</option>
+                                        <option value="上海">上海</option>
+                                        <option value="广州">广州</option>
+                                        <option value="深圳">深圳</option>
+                                        <option value="厦门">厦门</option>
+                                        <option value="昆明">昆明</option>
+                                        <option value="福州">福州</option>
+                                        <option value="武汉">武汉</option>
+                                        <option value="南京">南京</option>
+                                        <option value="成都">成都</option>
+                                        <option value="重庆">重庆</option>
+                                        <option value="杭州">杭州</option>
+                                        <option value="天津">天津</option>
+                                        <option value="苏州">苏州</option>
+                                        <option value="长沙">长沙</option>
+                                        <option value="青岛">青岛</option>
+                                        <option value="西安">西安</option>
+                                        <option value="郑州">郑州</option>
+                                    </select>
+                                    <input type="button"  class="btn btn-info"  value="选择城市" onclick="city_btn()" >
+
+                                </div>
+                                <p style="width: 10px"></p>
+
+                                <input type="text" class="form-control bg-white small"  value="投递数排行" name="heat" onfocus="this.blur()">
+                                <div class="input-group-append">
+                                    <a class="btn btn-danger" type="submit" href="/user/submit_number/">
+                                        <i class="fa fa-rocket fa-sm"></i>
+                                    </a>
+                                </div>
+                                <p style="width: 10px"></p>
+                                <input type="text" class="form-control bg-white small"  value="最新发布" name="latestrelease" onfocus="this.blur()">
+                                <div class="input-group-append">
+                                    <a class="btn btn-primary" type="submit" href="/user/latest_release/">
+                                        <i class="fa fa-arrow-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                    {% if current_page %}
+                        {% for i in current_page %}
+                            <div class="profile_info">
+                                <div class="seller-card">
+                                    <div class="user-stats-desc">
+                                        <ul class="user-stats"
+                                            style="border: none;margin: 0;padding: 0;font-size: inherit;">
+                                            <li style="font-size: 20px;font-weight: bolder;">
+                                                <a href="/user/job/{{ i.id }}/">{{ i.name }} </a><strong>{{ i.company }}</strong>
+                                            </li>
+                                            <li>¥{{ i.salary }}<strong
+                                                    style="font-weight: normal;">{{ i.type }}</strong></li>
+                                            <li>{{ i.workcity }}｜{{ i.experience }}｜{{ i.education }}<strong
+                                                    style="color: gray;font-weight: normal;">{{ i.create }} 发布 阅读({{ i.pv }}) 已投递({{ i.heat }})</strong>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                            <div class="profile_info">
+                                <div class="seller-card">
+                                    <div class="user-stats-desc">
+                        暂无职位信息
+                                    </div>
+                                </div>
+                            </div>
+                    {% endif %}
+
+                    <nav aria-label="Page navigation">
+                        <p class="pagination justify-content-center">
+                        共有数据{{ page_page_sum }}页，{{ page_data_sum }}条
+                        </p>
+                        <ul class="pagination justify-content-center">
+                            {% if current_page.has_previous %}
+                                {% if flag == 2 %}
+                                    <li>
+                                        <a href="/user/education_equirements/{{ academic }}?page={{ current_page.previous_page_number }}"
+                                        aria-label="Previous">
+                                            <span aria-hidden="true">
+                                                上一页
+                                            </span>
+                                        </a>
+                                    </li>
+                                {% elif flag == 3 %}
+                                    <li>
+                                        <a href="/user/city_filter/{{ city }}/?page={{ current_page.previous_page_number }}"
+                                        aria-label="Previous">
+                                            <span aria-hidden="true">
+                                                上一页
+                                            </span>
+                                        </a>
+                                    </li>
+                                {% elif flag == 4 %}
+                                    <li>
+                                        <a href="/user/submit_number/?page={{ current_page.previous_page_number }}"
+                                        aria-label="Previous">
+                                            <span aria-hidden="true">
+                                                上一页
+                                            </span>
+                                        </a>
+                                    </li>
+                                {% elif flag == 5 %}
+                                    <li>
+                                        <a href="/user/latest_release/?page={{ current_page.previous_page_number }}"
+                                        aria-label="Previous">
+                                            <span aria-hidden="true">
+                                                上一页
+                                            </span>
+                                        </a>
+                                    </li>
+                                {% elif flag == 1 %}
+                                    <li>
+                                        <a href="/user/search/?key_word={{ kw }}&type={{ type }}&ctype={{ ctype }}&page={{ current_page.previous_page_number }}" aria-label="Previous">
+                                            <span aria-hidden="true">
+                                                上一页
+                                            </span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                <li>
+                                    <a href="/index/?page={{ current_page.previous_page_number }}" aria-label="Previous">
+                                        <span aria-hidden="true">
+                                            上一页
+                                        </span>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            {% else %}
+                                <li class="disabled">
+                                    <a href="" aria-label="Previous">
+                                        <span aria-hidden="true">
+                                            上一页
+                                        </span>
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                            {% if current_page.has_next %}
+                                {% if flag == 2 %}
+                                    <li>
+                                        <a href="/user/education_equirements/{{ academic }}?page={{ current_page.next_page_number }}"
+                                        aria-label="Next">
+                                            <span aria-hidden="true">
+                                                下一页
+                                            </span>
+                                        </a>
+                                    </li>
+                                {% elif flag == 3 %}
+                                    <li>
+                                        <a href="/user/city_filter/{{ city }}/?page={{ current_page.next_page_number }}"
+                                        aria-label="Next">
+                                            <span aria-hidden="true">
+                                                下一页
+                                            </span>
+                                        </a>
+                                    </li>
+                                {% elif flag == 4 %}
+                                    <li>
+                                        <a href="/user/submit_number/?page={{ current_page.next_page_number }}"
+                                        aria-label="Next">
+                                            <span aria-hidden="true">
+                                                下一页
+                                            </span>
+                                        </a>
+                                    </li>
+                                {% elif flag == 5 %}
+                                    <li>
+                                        <a href="/user/latest_release/?page={{ current_page.next_page_number }}"
+                                        aria-label="Next">
+                                            <span aria-hidden="true">
+                                                下一页
+                                            </span>
+                                        </a>
+                                    </li>
+                                {% elif flag == 1%}
+                                    <li>
+                                        <a href="/user/search/?key_word={{ kw }}&type={{ type }}&ctype={{ ctype }}&page={{ current_page.next_page_number }}" aria-label="Next">
+                                            <span aria-hidden="true">
+                                                下一页
+                                            </span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="/user/all/?page={{ current_page.next_page_number }}" aria-label="Next">
+                                            <span aria-hidden="true">
+                                                下一页
+                                            </span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% else %}
+                                <li class="disabled">
+                                    <a href="" aria-label="Previous">
+                                        <span aria-hidden="true">
+                                            下一页
+                                        </span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    <p style="height: 10px"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

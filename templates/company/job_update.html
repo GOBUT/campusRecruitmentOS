@@ -1,0 +1,82 @@
+{% extends 'company/base.html' %}
+{% load static %}
+{% block title %}人才招聘系统-企业版{% endblock title %}
+{% block topfiles %}{% endblock topfiles %}
+{% block body %}
+    <div class="main-page second py-5">
+        <div class="container">
+            <div class="row">
+                <div class="profile_info" style="width: 100%;">
+                    <div class="seller-card" style="text-align: inherit; ">
+                        <form action="/company/job/update/{{ id }}/" method="post">
+                            <h2 class="h5">招聘信息修改</h2>
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">职位名称</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="name" value="{{ info.name }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">工作城市</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="workcity" value="{{ info.workcity }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">职位类型</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="type">
+                                        {% for i in types %}
+                                            <option value="{{ i.id }}"
+                                                    {% if i.name == info.type %}selected{% endif %}>{{ i.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">薪资</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="salary_start" value="{{ info.salary_start }}">
+                                </div>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="salary_end" value="{{ info.salary_end }}" >
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">学历要求</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="education">
+                                        <option value="#">学历要求</option>
+                                        <option value="专科">专科</option>
+                                        <option value="本科">本科</option>
+                                        <option value="研究生">研究生</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">经验要求</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="experience" value="{{ info.experience }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">职位需求</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="content" rows="5">{{ info.content }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">提交</button>
+                                    <span class="errmsg">{{ errmsg }}</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

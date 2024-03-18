@@ -1,0 +1,126 @@
+{% extends 'company/base.html' %}
+{% load static %}
+{% block title %}招聘信息-人才招聘系统{% endblock title %}
+{% block topfiles %}{% endblock topfiles %}
+{% block body %}
+    <section class="py-5 bg-dark inner-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="mt-0 mb-3 text-white">招聘信息</h1>
+                    <div class="breadcrumbs">
+                        <p class="mb-0 text-white"><a class="text-white" href="/company/">首页</a> / <span
+                                class="text-success">招聘信息</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="main-page best-selling">
+    <div class="view_slider recommended pt-5">
+        <div class="container">
+            <div class="row">
+{#                    <div class="col-md-11"><h3>招聘信息</h3></div>#}
+            </div>
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-md-12">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search"
+                          action="/company/search/" method="post">
+                        {% csrf_token %}
+                        <div class="input-group" style="float: left;margin-right: 10px;">
+                            <div class="sorting d-flex align-items-center" style="width: 140px;">
+                                <select class="custom-select custom-select-sm border-0 shadow-sm ml-2" name="type">
+                                        <option value="all">全部</option>
+                                    {% for i in types %}
+                                        <option value="{{ i.id }}">{{ i.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-group" style="float: left;margin-right: 10px;">
+                            <div class="sorting d-flex align-items-center" style="width: 140px;">
+                                <select class="custom-select custom-select-sm border-0 shadow-sm ml-2" name="row">
+                                    <option value="workname">岗位名称</option>
+                                    <option value="salary">薪资</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-white small" placeholder="搜索" name="kw">
+                            <div class="input-group-append">
+                                <button class="btn btn-success" type="submit">
+                                    <i class="fa fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                            <p style="width: 10px"></p>
+                            <input type="text" class="form-control bg-white small"  value="投递数排行" name="heat" onfocus="this.blur()">
+                            <div class="input-group-append">
+                                <a class="btn btn-danger" type="submit" href="/company/submit_number/">
+                                    <i class="fa fa-rocket fa-sm"></i>
+                                </a>
+                            </div>
+                            <p style="width: 10px"></p>
+                            <input type="text" class="form-control bg-white small"  value="最早发布" name="earliestrelease" onfocus="this.blur()">
+                            <div class="input-group-append">
+                                <a class="btn btn-primary" type="submit" href="/company/earliest_release/">
+                                    <i class="fa fa-arrow-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <div class="main-page best-selling">
+        <div class="view_slider recommended pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-11"><h3>招聘信息</h3></div>
+                    <div class="col-md-1"><a href="/company/job/insert/" class="btn btn-outline-success btn-sm mr-3">发布</a></div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                    {% if lists %}
+                        {% for i in lists %}
+                            <div class="profile_info">
+                                <div class="seller-card">
+                                    <div class="user-stats-desc">
+                                        <ul class="user-stats"
+                                            style="border: none;margin: 0;padding: 0;font-size: inherit;">
+                                            <li style="font-size: 20px;font-weight: bolder;">
+                                                <a href="/company/job/update/{{ i.id }}/">{{ i.name }}</a><strong>{{ i.company }}</strong>
+                                            </li>
+                                            <li>¥{{ i.salary }} ｜{{ i.workcity }}｜{{ i.experience }}｜{{ i.education }}<strong
+                                                    style="font-weight: normal;">{{ i.type }}</strong></li>
+                                            <li> {{ i.create }}  发布 阅读({{ i.heat }}) 已投递({{ i.heat }})
+                                                <strong style="color: gray;font-weight: normal;">
+                                                    <a href="/company/job/update/{{ i.id }}/" class="btn btn-outline-success btn-sm" style="color: #2cdd9b;">修改</a>
+                                                    <a href="/company/job/delete/{{ i.id }}/" class="btn btn-outline-success btn-sm" style="color: #2cdd9b;">删除</a>
+                                                </strong>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                            <div class="profile_info">
+                                <div class="seller-card">
+                                    <div class="user-stats-desc">
+                        暂无职位信息
+                                    </div>
+                                </div>
+                            </div>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

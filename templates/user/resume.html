@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}我的简历-人才招聘系统{% endblock title %}
+{% block topfiles %}{% endblock topfiles %}
+{% block body %}
+    <div class="main-page second py-5">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-4 left">
+                  <div class="profile_info">
+                     <div class="seller-card">
+
+                        <div><a href="#" class="ambassadors-badge">应聘者</a></div>
+                        <div class="user-profile-info">
+                           <div>
+                              <div class="user-profile-image">
+                                 <label class="user-pict">
+                                 <img src="{% if info.photo %}/{{ info.photo }}{% else %}/static/images/user/Avatar.png{% endif %}" class="img-fluid user-pict-img">
+{#                                 <img class="img-fluid user-pict-img" src="{% if info.photo %}/{{ info.photo }}{% else %}/static/images/user/Avatar.png{% endif %}">#}
+                                 <a href="#" class="user-badge-round user-badge-round-med locale-en-us top-rated-seller"></a></label>
+                              </div>
+                           </div>
+                            <br>
+                           <div class="user-profile-label">
+                              <div class="username-line">
+                                 <a href="#" class="seller-link">{{ info.name }}</a>
+                              </div>
+                              <div class="oneliner-wrapper">
+                                 <small class="oneliner">{{ info.phone }}</small>
+                                 <div class="ratings-wrapper">
+                                    <p class="rating-text">{{ info.mail }}</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="buttons-wrapper">
+                           <a href="/user/resume/update/" class="btn-lrg-standard btn-contact-me js-contact-me js-open-popup-join">修改简历</a>
+{#                           <div class="btn-lrg-standard btn-white btn-custom-order">修改头像</div>#}
+                        </div>
+                        <div class="user-stats-desc">
+                           <ul class="user-stats">
+                              <li class="recent-delivery">性别<strong>{{ info.sex }}</strong></li>
+                               <li class="response-time">出生年月<strong>{% if info.birth %}{{ info.birth }}{% endif %}</strong></li>
+                               <li class="member-since">户籍所在地<strong>{{ info.registration }}</strong></li>
+                               <li class="location">居住城市<strong>{{ info.now }}</strong></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+
+               </div><div class="seller-profile col-lg-8 right">
+                     <div class="languages">
+                        <h3>求职意向</h3>
+                        <ul>
+                           <li><span>求职岗位&nbsp;</span>&nbsp;&nbsp;{{ info.job }}</li>
+                           <li><span>薪资要求&nbsp;</span>&nbsp;&nbsp;{{ info.salary }}</li>
+                        </ul>
+                     </div>
+                     <div class="description">
+                        <h3>教育经历</h3>
+                        <p>{{ info.education }}</p>
+                     </div>
+                     <div class="description">
+                        <h3>项目经历</h3>
+                        <p>{{ info.subject }}</p>
+                     </div>
+                     <div class="description">
+                        <h3>语言能力</h3>
+                        <p>{{ info.language }}</p>
+                     </div>
+                     <div class="description">
+                        <h3>专业技能</h3>
+                        <p>{{ info.skill }}</p>
+                     </div>
+                     <div class="description">
+                        <h3>证书</h3>
+                        <p>{% if info.certificates %}{{ info.certificates }}{% else %}暂无{% endif %}</p>
+                     </div>
+                     <div class="description">
+                        <h3>自我评价</h3>
+                        <p>&nbsp;&nbsp;{{ info.evaluation }}</p>
+                     </div>
+
+                  </div>
+
+            </div>
+         </div>
+      </div>
+{% endblock body %}
